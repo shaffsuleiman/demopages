@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soft WTA · Tibbling Technologies</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="assets/logo-tp.png" alt="Logo" />
+      <div style="line-height:1.0; margin-bottom:0;">
+        <h1 style="margin:0;">Soft WTA</h1>
+        <p style="margin:0;">Tibbling Technologies</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#hero" class="active">Home</a>
+      <a href="#demo">Demo</a>
+      <a href="https://www.biorxiv.org/content/10.1101/2024.10.06.616839v2.full.pdf">Paper</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h2>Biologically Realistic Computational Primitives Improve Vision Transformer Performance</h2>
+      <p>A soft winner-take-all (sWTA) microcircuit implemented across neuromorphic hardware and deep networks improves robustness and energy efficiency.</p>
+      <a href="#demo" class="btn">→ Try the demo</a>
+    </div>
+    <video src="assets/2.mp4" class="hero-bg" alt="sWTA overview" autoplay loop muted></video>
+  </section>
+
+  <section class="section">
+    <h2>Introduction</h2>
+    <p>Can we build smarter AI by mimicking the brain?
+      This research takes a step in that direction by translating how real brain circuits process information into computer models. We show that a brain-inspired computation—called soft winner-take-all (sWTA)—can be used to clean up noisy signals, adapt to changing contexts, and improve the performance of deep learning models like Vision Transformers. From mouse brain slices to IBM’s neuromorphic hardware, and finally into AI systems, we demonstrate a full pipeline for building more efficient and adaptable machine intelligence.</p>
+  </section>
+
+  <section class="section light">
+    <h2>Sliding-Window WTA Computation for Feature Enhancement</h2>
+    <p>The soft winner-take-all (sWTA) mechanism was implemented as a sliding-window layer that enhances the most informative features in an image. Inspired by neural signal regulation in the cortex, this layer processes patches of the image and selectively amplifies the region with the highest signal variance — essentially choosing the "winner" region in a biologically plausible way.
+      This step acts as a contrast-enhancing pre-filter that boosts signal-to-noise ratio before the input reaches the core of a Vision Transformer (ViT) model. Unlike generic normalization layers, this approach preserves context and selectively emphasizes salient parts of the image, mimicking the brain’s ability to prioritize meaningful visual features. This low-overhead computation is compatible with both embedded and large-scale AI models.</p>
+    <img src="assets/4a.png" alt="Experimental slice data" class="inline-image">
+    <p class="caption">The WTA layer enhances contrast by selecting high-signal patches using a sliding window mechanism.</p>
+
+  </section>
+  <section class="section">
+    <h2>From Neurons to Computation</h2>
+    <div class="content-with-figure">
+      <div class="text-content">
+        <p>
+          What makes this approach biologically realistic? It begins with real neurons in the visual cortex.
+          Our sWTA model is built on four key inhibitory cell types—<strong>PV, SST, VIP, and LAMP5</strong>—each playing a distinct role in cortical computation:
+        </p>
+  
+          
+        <ul class="neuron-list">
+          <li><strong>Parvalbumin (PV)</strong>: Sharpens signals via <em>fast feedforward inhibition</em>. Mapped to <code>threshold control</code> in hardware.</li>
+          <li><strong>Somatostatin (SST)</strong>: Adds <em>global feedback inhibition</em>, shaping contrast and context. Mapped to <code>feedback gain</code>.</li>
+          <li><strong>VIP</strong>: Modulates inhibition by turning down SST, enabling <em>flexible disinhibition</em>. Mapped as <code>inhibitory gate tuning</code>.</li>
+          <li><strong>LAMP5</strong>: Regulates signal strength via <em>normalization</em>. Mapped to <code>leak control</code> in neuromorphic chips.</li>
+        </ul>
+
+        <p>
+          This biologically grounded mapping forms the backbone of our soft WTA microcircuit. It's not just inspired by the brain—it's derived from it.
+        </p>
+      </div>
+      <div class="figure-content">
+        <img src="assets/nm.png" alt="Neuron to Function Mapping" class="side-figure">
+        <p class="caption">How four types of interneurons in cortex shape gain, inhibition, and selectivity in the WTA circuit.</p>
+      </div>
+    </div>
+  </section>
+</section>
+<section class="section light">
+  <h2>Powered by Brain-Inspired Chips</h2>
+  <div class="content-with-figure-reverse">
+    <div class="text-content">
+      <p>
+        To bring these cortical computations to life, we implemented the sWTA model on <strong>IBM's TrueNorth</strong> — a neuromorphic chip designed to emulate how the brain works.
+      </p>
+
+      <p>
+        Using a novel gain-matching algorithm, we translated biologically observed dynamics (like inhibition thresholds and feedback loops) into chip-level parameters such as:
+      </p>
+      <ul class="neurochip-list">
+        <li><code>Threshold</code> → PV-like inhibition</li>
+        <li><code>Leak</code> → LAMP5-style gain normalization</li>
+        <li><code>Crossbar weights</code> → SST-mediated feedback and VIP disinhibition</li>
+      </ul>
+
+      <p>
+        The result? A silicon microcircuit that behaves like a real cortical network — able to filter noise, maintain persistent memory states, and run efficiently in spiking mode under realistic noise conditions.
+      </p>
+    </div>
+    <div class="figure-content">
+      <img src="assets/nm2.png" alt="TrueNorth Neuromorphic Mapping" class="side-figure">
+      <p class="caption">Mapping cortical circuit motifs to TrueNorth's digital neurons enables energy-efficient biological computation.</p>
+    </div>
+  </div>
+</section>
+
+  <section class="section">
+    <h2>Improved Generalization in Domain-Shifted Digit Classification</h2>
+    <div class="content-with-figure">
+      <div class="text-content">
+        <p>To evaluate real-world applicability, the sWTA-enhanced Vision Transformer was tested on cross-domain digit classification. Models trained on one dataset (e.g., MNIST) were tested on visually distinct datasets (e.g., SVHN or MNIST-M) that represent domain shifts in lighting, texture, or style.</p>
+        <p>The results show that adding the sWTA layer significantly improves classification accuracy across multiple architectures, including ViT, EfficientNet, ResNet, CapsuleNet, and MobileNet. For example, the ViT with WTA showed up to a 30% boost on certain domain transfer tasks. These gains demonstrate the WTA layer's effectiveness as a pre-processing strategy that improves robustness without requiring domain-specific training.</p>
+        <p>This outcome mirrors how the brain adapts to new environments — using flexible, general-purpose computations rather than overfitting to narrow datasets.</p>
+      </div>
+      <div class="figure-content">
+        <img src="assets/4cd.png" alt="Biophysical model" class="side-figure">
+        <p class="caption">The sWTA layer improves ViT classification accuracy across challenging digit datasets with domain shifts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <h2>WTA Layer Minimizes Domain Shift in Input Representations</h2>
+    <p>When images from different datasets (e.g., MNIST vs. MNIST-M) are processed by the WTA layer, their transformed versions become much more aligned in appearance.
+
+This visual harmonization suggests that the WTA layer not only sharpens contrast but also filters out irrelevant variations in background, lighting, or texture. As a result, the input space becomes more homogeneous, making it easier for downstream models to focus on task-relevant information.
+
+Such representation alignment is critical for robust machine learning — especially when training and test data come from different distributions, which is often the case in real-world applications.</p>
+    
+    <div class="image-transformation-demo">
+      <div class="demo-images-container">
+        <div class="image-set active" id="imageSet1">
+          <div class="demo-image-item">
+            <img src="assets/b1.png" alt="Original Image 1" class="demo-img">
+            <p class="image-label">Original MNIST</p>
+          </div>
+          <div class="demo-image-item">
+            <img src="assets/b2.png" alt="Original Image 2" class="demo-img">
+            <p class="image-label">Original MNIST-M</p>
+          </div>
+          <div class="demo-image-item">
+            <img src="assets/b1.png" alt="Original Image 3" class="demo-img">
+            <p class="image-label">Original SVHN</p>
+          </div>
+          <div class="demo-image-item">
+            <img src="assets/b2.png" alt="Original Image 4" class="demo-img">
+            <p class="image-label">Original Fashion</p>
+          </div>
+        </div>
+        
+        <div class="image-set" id="imageSet2">
+          <div class="demo-image-item">
+            <img src="assets/a1.png" alt="Processed Image 1" class="demo-img">
+            <p class="image-label">sWTA MNIST</p>
+          </div>
+          <div class="demo-image-item">
+            <img src="assets/a2.png" alt="Processed Image 2" class="demo-img">
+            <p class="image-label">sWTA MNIST-M</p>
+          </div>
+          <div class="demo-image-item">
+            <img src="assets/a1.png" alt="Processed Image 3" class="demo-img">
+            <p class="image-label">sWTA SVHN</p>
+          </div>
+          <div class="demo-image-item">
+            <img src="assets/a2.png" alt="Processed Image 4" class="demo-img">
+            <p class="image-label">sWTA Fashion</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="demo-controls">
+        <button class="transformation-btn" id="transformBtn">
+          <span class="btn-text" id="btnText">Show ViT Patches</span>
+          <span class="btn-icon">→</span>
+        </button>
+        <p class="demo-description" id="demoDescription">
+          Click to see how sWTA processing creates more uniform representations across different domains
+        </p>
+      </div>
+    </div>
+    
+    <p class="caption">Figure 4B: The sWTA layer visually reduces domain shift, aligning features from MNIST and MNIST-M.</p>
+  </section>
+
+  <section class="section">
+    <h2>Enhanced Segmentation Performance on Nighttime Images</h2>
+    <p>The benefits of the WTA layer extend beyond classification tasks. In a separate evaluation, the sWTA layer was integrated into RefineNet, a high-resolution semantic segmentation model, and trained only on daytime driving scenes (Cityscapes dataset). Testing was done on nighttime images (Nighttime Driving dataset) — a classic domain shift.
+      Despite the absence of nighttime training data, the WTA-enhanced RefineNet achieved higher mean Intersection over Union (mIoU) scores than baseline models, including domain-adaptive variants. This performance shows that the WTA layer improves feature consistency and robustness even in challenging low-light conditions.
+      The result highlights the broad applicability of sWTA as a general-purpose neural preprocessor — one that mimics cortical computations to improve modern vision systems in both classification and segmentation tasks.</p>
+    <img src="assets/4e.png" alt="Vision Transformer results" class="inline-image">
+    <!-- <img src="assets/4f.png" alt="Vision Transformer results" class="inline-image"> -->
+    <p class="caption">Adding sWTA layers boosts model robustness on domain-shifted vision tasks.</p>
+  </section>
+
+  <section class="section light">
+    <h2>Robustness Comparison Across Architectures</h2>
+    <p>
+      To assess whether the benefits of sWTA generalize across model types, we applied the WTA layer to various deep networks including EfficientNet, ResNet, CapsuleNet, MobileNet, and ViT. Each model was trained on a source dataset (MNIST) and evaluated on domain-shifted datasets (MNIST-M, SVHN).
+    </p>
+    
+    <div class="three-figure-grid">
+      <div class="figure-item">
+        <img src="assets/arch1.png" alt="Architecture comparison 1" class="grid-figure">
+        <!-- <p class="figure-caption">Figure 5A: ViT and EfficientNet performance gains with sWTA across different domain shifts.</p> -->
+      </div>
+      <div class="figure-item">
+        <img src="assets/arch2.png" alt="Architecture comparison 2" class="grid-figure">
+        <!-- <p class="figure-caption">Figure 5B: ResNet and CapsuleNet robustness improvements using sWTA preprocessing.</p> -->
+      </div>
+     
+    </div>
+    
+    <p>
+      The table below shows the relative improvement in accuracy (%) when each architecture is equipped with the WTA layer.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Target Dataset</th>
+          <th>Accuracy Gain with sWTA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ViT</td>
+          <td>MNIST-M</td>
+          <td>+30%</td>
+        </tr>
+        <tr>
+          <td>EfficientNet</td>
+          <td>SVHN</td>
+          <td>+22%</td>
+        </tr>
+        <tr>
+          <td>ResNet</td>
+          <td>MNIST-M</td>
+          <td>+19%</td>
+        </tr>
+        <tr>
+          <td>CapsuleNet</td>
+          <td>SVHN</td>
+          <td>+25%</td>
+        </tr>
+        <tr>
+          <td>MobileNet</td>
+          <td>MNIST-M</td>
+          <td>+17%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="caption">Supplementary Figure 6: Accuracy improvements across architectures and domain shifts using the sWTA layer.</p>
+  </section>
+
+  <section class="section">
+    <h2>Domain Generalization and Feature Alignment</h2>
+    <p>
+      Supplementary Figure 7 illustrates how the WTA layer improves the alignment of feature distributions across domains. Using t-SNE projections, we observe that representations from MNIST and MNIST-M become more tightly clustered when passed through sWTA, even though the two datasets differ significantly in style.
+    </p>
+    <p>
+      This confirms that the WTA layer improves domain generalization by emphasizing semantic features over superficial differences like background textures or noise — a critical step for building adaptable AI systems.
+    </p>
+
+    <img src="assets/supp7.png" alt="Domain alignment" class="inline-image">
+    <p class="caption">Feature alignment improves with sWTA preprocessing, leading to better generalization across domains.</p>
+  </section>
+
+  <section class="section light">
+  <h2>Conclusion</h2>
+  <p>
+    This work charts a unique path from cortical circuits to cutting-edge AI. By grounding computation in real biological principles — specifically the soft winner-take-all (sWTA) motif — we bridge the gap between neuroscience, neuromorphic engineering, and deep learning.
+  </p>
+  <p>
+    From neurons in the mouse visual cortex to IBM’s TrueNorth chip and into modern models like Vision Transformers, we’ve shown that biologically inspired design can yield systems that are more <strong>robust, adaptive, and efficient</strong>. The sWTA layer not only enhances performance across tasks like classification and segmentation but also offers a general-purpose mechanism for filtering, focusing, and remembering — just as the brain does.
+  </p>
+  <p>
+    As AI models scale in size and complexity, the need for smarter, more efficient foundations becomes critical. This work demonstrates that the brain’s tried-and-tested computational primitives offer not just inspiration — but implementation. sWTA is one such primitive, and its integration across hardware and software points toward a future where machine intelligence is not just faster — but <em>more brain-like</em>.
+  </p>
+  <a href="https://doi.org/10.1101/2024.10.06.616839" target="_blank" class="btn dark">→ Read the full preprint</a>
+</section>
+
+
+  <section class="demo-section" id="demo">
+    <div class="demo-container">
+      <div class="demo-header">
+        <h2>Try the sWTA Demo</h2>
+        <p>Experience the power of soft winner-take-all processing on your own images</p>
+      </div>
+      
+      <div class="demo-content">
+        <div class="demo-upload-area">
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">📷</div>
+            <p class="upload-text">Click to upload an image or drag and drop</p>
+            <p class="upload-subtext">Supports JPG, PNG, and GIF files</p>
+            <input type="file" id="imageUpload" accept="image/*" class="file-input"/>
+          </div>
+        </div>
+        
+        <div class="demo-preview-area">
+          <div class="preview-container">
+            <img id="preview" src="assets/drugdiscovery.png" alt="Image Preview" class="preview-image" />
+            <div class="preview-overlay">
+              <div class="preview-label">Preview</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="demo-actions">
+        <a class="demo-btn primary" href="https://colab.research.google.com/drive/YOUR-COLAB-ID" target="_blank">
+          <span class="btn-icon">🚀</span>
+          Launch in Google Colab
+        </a>
+        <a class="demo-btn secondary" href="https://www.biorxiv.org/content/10.1101/2024.10.06.616839v2.full.pdf" target="_blank">
+          <span class="btn-icon">📄</span>
+          Read the Paper
+        </a>
+      </div>
+      <div class="demo-info">
+        <div class="info-grid">
+          <div class="info-item">
+            <h4>🧠 Brain-Inspired</h4>
+            <p>Based on cortical microcircuits</p>
+          </div>
+          <div class="info-item">
+            <h4>⚡ Real-Time</h4>
+            <p>Fast preprocessing layer</p>
+          </div>
+          <div class="info-item">
+            <h4>🎯 Robust</h4>
+            <p>Improves domain adaptation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+  <h2 class="contact-heading">
+    Ready to Accelerate Your Drug Discovery?
+  </h2>
+
+  <p class="contact-subheading">
+    Get In Touch With Us
+  </p>
+
+  <form action="https://formspree.io/f/xvoezewb" method="POST" target="_blank" class="contact-form">
+    <input type="email" name="email" placeholder="Your email" required class="form-input" />
+    
+    <textarea name="message" placeholder="Optional message" rows="3" class="form-textarea"></textarea>
+    
+    <button type="submit" class="form-button">Connect</button>
+  </form>
+</section>
+
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
