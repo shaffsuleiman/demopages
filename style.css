@@ -1421,7 +1421,7 @@ body.menu-open {
   }
   
   .transition-container {
-    height: 500px;
+    height: 600px;
     margin: 0 10px;
     border-radius: 12px;
   }
@@ -1437,12 +1437,12 @@ body.menu-open {
   
   .set-title {
     font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
   
   .image-item {
     min-height: 120px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
   
   .image-label {
@@ -1467,7 +1467,7 @@ body.menu-open {
   }
   
   .transition-container {
-    height: 550px;
+    height: 650px;
     margin: 0 5px;
   }
   
