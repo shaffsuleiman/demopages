@@ -20,7 +20,12 @@
         <p style="margin:0;">Tibbling Technologies</p>
       </div>
     </div>
-    <nav>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <nav class="nav-menu">
       <a href="#hero" class="active">Home</a>
       <a href="#demo">Demo</a>
       <a href="https://www.biorxiv.org/content/10.1101/2024.10.06.616839v2.full.pdf">Paper</a>
@@ -43,10 +48,10 @@
       This research takes a step in that direction by translating how real brain circuits process information into computer models. We show that a brain-inspired computation—called soft winner-take-all (sWTA)—can be used to clean up noisy signals, adapt to changing contexts, and improve the performance of deep learning models like Vision Transformers. From mouse brain slices to IBM’s neuromorphic hardware, and finally into AI systems, we demonstrate a full pipeline for building more efficient and adaptable machine intelligence.</p>
   </section>
 
-  <section class="section light">
+    <section class="section light">
     <h2>Sliding-Window WTA Computation for Feature Enhancement</h2>
-    <p>The soft winner-take-all (sWTA) mechanism was implemented as a sliding-window layer that enhances the most informative features in an image. Inspired by neural signal regulation in the cortex, this layer processes patches of the image and selectively amplifies the region with the highest signal variance — essentially choosing the "winner" region in a biologically plausible way.
-      This step acts as a contrast-enhancing pre-filter that boosts signal-to-noise ratio before the input reaches the core of a Vision Transformer (ViT) model. Unlike generic normalization layers, this approach preserves context and selectively emphasizes salient parts of the image, mimicking the brain’s ability to prioritize meaningful visual features. This low-overhead computation is compatible with both embedded and large-scale AI models.</p>
+    <p>The soft winner-take-all (sWTA) mechanism was implemented as a sliding-window layer that enhances the most informative features in an image. Inspired by neural signal regulation in the cortex, this layer processes patches of the image and selectively amplifies the region with the highest signal variance, essentially choosing the "winner" region in a biologically plausible way.
+      This step acts as a contrast-enhancing pre-filter that boosts signal-to-noise ratio before the input reaches the core of a Vision Transformer (ViT) model. Unlike generic normalization layers, this approach preserves context and selectively emphasizes salient parts of the image, mimicking the brain's ability to prioritize meaningful visual features. This low-overhead computation is compatible with both embedded and large-scale AI models.</p>
     <img src="assets/4a.png" alt="Experimental slice data" class="inline-image">
     <p class="caption">The WTA layer enhances contrast by selecting high-signal patches using a sliding window mechanism.</p>
 
@@ -55,7 +60,7 @@
     <h2>From Neurons to Computation</h2>
     <p class="intro-text">
       What makes this approach biologically realistic? It begins with real neurons in the visual cortex.
-      Our sWTA model is built on four key inhibitory cell types—<strong>PV, SST, VIP, and LAMP5</strong>—each playing a distinct role in cortical computation.
+      Our sWTA model is built on four key inhibitory cell types: <strong>PV, SST, VIP, and LAMP5</strong>, each playing a distinct role in cortical computation.
     </p>
     
     <div class="centered-figure-container">
@@ -69,13 +74,13 @@
       <strong>Parvalbumin (PV)</strong> sharpens signals via fast feedforward inhibition, mapped to threshold control in hardware. <strong>Somatostatin (SST)</strong> adds global feedback inhibition, shaping contrast and context, mapped to feedback gain. <strong>VIP</strong> modulates inhibition by turning down SST, enabling flexible disinhibition, mapped as inhibitory gate tuning. <strong>LAMP5</strong> regulates signal strength via normalization, mapped to leak control in neuromorphic chips.
     </p>
     <p>
-      This biologically grounded mapping forms the backbone of our soft WTA microcircuit. It's not just inspired by the brain—it's derived from it.
+      This biologically grounded mapping forms the backbone of our soft WTA microcircuit. It's not just inspired by the brain but derived from it.
     </p>
   </section>
   <section class="section light centered-figure-section">
     <h2>Powered by Brain-Inspired Chips</h2>
     <p class="intro-text">
-      To bring these cortical computations to life, we implemented the sWTA model on <strong>IBM's TrueNorth</strong> 
+      To bring these cortical computations to life, we implemented the sWTA model on <strong>IBM's TrueNorth</strong>, 
       a neuromorphic chip designed to emulate how the brain works.
     </p>
     
@@ -90,7 +95,7 @@
       Using a novel gain-matching algorithm, we translated biologically observed dynamics (like inhibition thresholds and feedback loops) into chip-level parameters: threshold maps to PV-like inhibition, leak corresponds to LAMP5-style gain normalization, and crossbar weights implement SST-mediated feedback and VIP disinhibition.
     </p>
     <p>
-      The result? A silicon microcircuit that behaves like a real cortical network — able to filter noise, maintain persistent memory states, and run efficiently in spiking mode under realistic noise conditions.
+      The result? A silicon microcircuit that behaves like a real cortical network, able to filter noise, maintain persistent memory states, and run efficiently in spiking mode under realistic noise conditions.
     </p>
   </section>
 
@@ -110,7 +115,7 @@
         The results show that adding the sWTA layer significantly improves classification accuracy across multiple architectures, including ViT, EfficientNet, ResNet, CapsuleNet, and MobileNet. For example, the ViT with WTA showed up to a 30% boost on certain domain transfer tasks. These gains demonstrate the WTA layer's effectiveness as a pre-processing strategy that improves robustness without requiring domain-specific training.
       </p>
       <p>
-        This outcome mirrors how the brain adapts to new environments — using flexible, general-purpose computations rather than overfitting to narrow datasets.
+        This outcome mirrors how the brain adapts to new environments by using flexible, general-purpose computations rather than overfitting to narrow datasets.
       </p>
     
   </section>
@@ -167,9 +172,9 @@
 
   <section class="section">
     <h2>Enhanced Segmentation Performance on Nighttime Images</h2>
-    <p>The benefits of the WTA layer extend beyond classification tasks. In a separate evaluation, the sWTA layer was integrated into RefineNet, a high-resolution semantic segmentation model, and trained only on daytime driving scenes (Cityscapes dataset). Testing was done on nighttime images (Nighttime Driving dataset) — a classic domain shift.
+    <p>The benefits of the WTA layer extend beyond classification tasks. In a separate evaluation, the sWTA layer was integrated into RefineNet, a high-resolution semantic segmentation model, and trained only on daytime driving scenes (Cityscapes dataset). Testing was done on nighttime images (Nighttime Driving dataset), a classic domain shift.
       Despite the absence of nighttime training data, the WTA-enhanced RefineNet achieved higher mean Intersection over Union (mIoU) scores than baseline models, including domain-adaptive variants. This performance shows that the WTA layer improves feature consistency and robustness even in challenging low-light conditions.
-      The result highlights the broad applicability of sWTA as a general-purpose neural preprocessor — one that mimics cortical computations to improve modern vision systems in both classification and segmentation tasks.</p>
+      The result highlights the broad applicability of sWTA as a general-purpose neural preprocessor that mimics cortical computations to improve modern vision systems in both classification and segmentation tasks.</p>
     <img src="assets/4e.png" alt="Vision Transformer results" class="inline-image">
     <!-- <img src="assets/4f.png" alt="Vision Transformer results" class="inline-image"> -->
     <p class="caption">Adding sWTA layers boosts model robustness on domain-shifted vision tasks.</p>
@@ -243,7 +248,7 @@
       Supplementary Figure 7 illustrates how the WTA layer improves the alignment of feature distributions across domains. Using t-SNE projections, we observe that representations from MNIST and MNIST-M become more tightly clustered when passed through sWTA, even though the two datasets differ significantly in style.
     </p>
     <p>
-      This confirms that the WTA layer improves domain generalization by emphasizing semantic features over superficial differences like background textures or noise — a critical step for building adaptable AI systems.
+      This confirms that the WTA layer improves domain generalization by emphasizing semantic features over superficial differences like background textures or noise, a critical step for building adaptable AI systems.
     </p>
 
     <img src="assets/supp7.png" alt="Domain alignment" class="inline-image">
@@ -252,14 +257,14 @@
 
   <section class="section light">
   <h2>Conclusion</h2>
-  <p>
-    This work charts a unique path from cortical circuits to cutting-edge AI. By grounding computation in real biological principles — specifically the soft winner-take-all (sWTA) motif — we bridge the gap between neuroscience, neuromorphic engineering, and deep learning.
+    <p>
+    This work charts a unique path from cortical circuits to cutting-edge AI. By grounding computation in real biological principles, specifically the soft winner-take-all (sWTA) motif, we bridge the gap between neuroscience, neuromorphic engineering, and deep learning.
   </p>
   <p>
-    From neurons in the mouse visual cortex to IBM’s TrueNorth chip and into modern models like Vision Transformers, we’ve shown that biologically inspired design can yield systems that are more <strong>robust, adaptive, and efficient</strong>. The sWTA layer not only enhances performance across tasks like classification and segmentation but also offers a general-purpose mechanism for filtering, focusing, and remembering — just as the brain does.
+    From neurons in the mouse visual cortex to IBM's TrueNorth chip and into modern models like Vision Transformers, we've shown that biologically inspired design can yield systems that are more <strong>robust, adaptive, and efficient</strong>. The sWTA layer not only enhances performance across tasks like classification and segmentation but also offers a general-purpose mechanism for filtering, focusing, and remembering, just as the brain does.
   </p>
   <p>
-    As AI models scale in size and complexity, the need for smarter, more efficient foundations becomes critical. This work demonstrates that the brain’s tried-and-tested computational primitives offer not just inspiration — but implementation. sWTA is one such primitive, and its integration across hardware and software points toward a future where machine intelligence is not just faster — but <em>more brain-like</em>.
+    As AI models scale in size and complexity, the need for smarter, more efficient foundations becomes critical. This work demonstrates that the brain's tried-and-tested computational primitives offer not just inspiration but implementation. sWTA is one such primitive, and its integration across hardware and software points toward a future where machine intelligence is not just faster but <em>more brain-like</em>.
   </p>
   <a href="https://www.biorxiv.org/content/10.1101/2024.10.06.616839v2.full.pdf" target="_blank" class="btn dark">→ Read the full preprint</a>
 </section>
