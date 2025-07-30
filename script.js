@@ -1,5 +1,30 @@
 // Enhanced Demo Section Functionality
 document.addEventListener('DOMContentLoaded', function() {
+  // Side-by-side three images showcase
+  const originalSet = document.getElementById('originalSet');
+  const processedSet = document.getElementById('processedSet');
+  let showingOriginal = true;
+  
+  function toggleImageSets() {
+    if (showingOriginal) {
+      // Switch to processed images
+      originalSet.classList.remove('active');
+      processedSet.classList.add('active');
+      showingOriginal = false;
+    } else {
+      // Switch back to original images
+      processedSet.classList.remove('active');
+      originalSet.classList.add('active');
+      showingOriginal = true;
+    }
+  }
+  
+  // Start cycling if we have the image sets
+  if (originalSet && processedSet) {
+    // Toggle every 3 seconds
+    setInterval(toggleImageSets, 3000);
+  }
+  
   const imageUpload = document.getElementById('imageUpload');
   const preview = document.getElementById('preview');
   const uploadZone = document.getElementById('uploadZone');
